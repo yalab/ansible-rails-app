@@ -1,12 +1,12 @@
 upstream {{ app_name }} {
-  server unix:///tmp/puma_{{ app_name }}.sock;
+  server unix://{{deploy_directory}}/shared/tmp/sockets/puma_{{ app_name }}.sock;
 }
 
 server {
   gzip on;
   listen 80;
 
-  gzip_types text/plain text/html text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript application/json;                                                                      
+  gzip_types text/plain text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript application/json;                                                                      
   server_name {{ webserver_name }};
   root {{ deploy_directory }}/current/public;
 

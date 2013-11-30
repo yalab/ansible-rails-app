@@ -1,24 +1,79 @@
+---
+# Ruby from source playbook (https://github.com/jgrowl/ansible-playbook-ruby-from-src)
+- name: upgrade
+  action: apt update_cache=yes upgrade=yes
+
+- name: install ruby dependencies 
+  action: apt pkg={{item}} state=installed
+  with_items:
+    - build-essential
+    - automake
+    - bison
+    - autoconf
+    - pkg-config
+    - libreadline6
+    - libreadline6-dev
+    - openssl
+    - libssl-dev
+    - curl
+    - git-core
+    - zlib1g
+    - zlib1g-dev
+    - libyaml-dev
+    - libsqlite3-dev
+    - libxml2-dev
+    - libxslt1-dev
+    - curl
+
 - name: Install app dependencies 
-  action: apt pkg=$item state=installed
+  action: apt pkg={{item}} state=installed
   with_items:
     - libpq-dev
     - nodejs
+    - imagemagick
+  tags: package
+
+# Install correct version of ruby from source
+- name: ruby-from-src | ensure directory temporary ruby download directory is present
+  file: state=directory path={{rubyTmpDir}}
+
+- name: ruby-from-src | Download ruby source 
+  get_url: url={{rubyUrl}} dest={{rubyTmpDir}}
+
+- name: ruby-from-src | ensure ruby is extracted
+  command: tar -xf {{rubyCompressedFile}} chdir={{rubyTmpDir}} creates={{tmpRubyPath}}
+
+- name: ruby-from-src | ensure ruby is configured
+  command: ./configure chdir={{tmpRubyPath}} creates={{tmpRubyPath}}/Makefile
+
+- name: ruby-from-src | ensure ruby is compiled
+  command: make chdir={{tmpRubyPath}} creates={{tmpRubyPath}}/ruby
+
+- name: ruby-from-src | ensure ruby is installed
+  command: make install chdir={{tmpRubyPath}} creates=/usr/local/bin/ruby
 
 - name: Create deployment user
   user: name=deploy comment="Application deployment user"
 
+- authorized_key: user=deploy key="{{ lookup('file', '/Users/ryanbigg/.ssh/id_rsa.pub') }}"
+
 - name: Create deployment directory
   file: path=/webapps/{{ app_name }} owner=deploy group=deploy state=directory
 
-- name: Add puma runner
-  template: src=usr_local_bin_run-puma.j2 dest=/usr/local/bin/run-puma force=yes mode=755
+- name: Install Bundler
+  command: gem install bundler
 
-- name: Add puma init script
-  template: src=etc_init_d_puma.j2 dest=/etc/init.d/puma force=yes mode=755
+- name: Make shared directories
+  file: path={{deploy_directory}}/shared/{{item}} group=deploy owner=deploy state=directory
+  with_items:
+    - tmp
+    - log
+    - public
+    - bundle
+    - bin
+    - config
+    - config/puma
+  tags: shared
 
-- name: Copy puma config
-  template: src=etc_puma.conf.j2 dest=/etc/puma.conf force=yes mode=644
-
-- name: Add puma to upstart
-  command: update-rc.d -f puma defaults
-
+- name: Install database.yml
+  template: src=database.yml.j2 dest={{deploy_directory}}/shared/config/database.yml force=yes mode=755 owner=deploy
