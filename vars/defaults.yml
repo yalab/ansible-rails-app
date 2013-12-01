@@ -1,7 +1,7 @@
 ## webapp
 
 webserver_name: 162.243.123.190
-deploy_directory: /webapps/spree
+deploy_directory: /data/spree
 app_name: spree
 
 ## stolen from https://github.com/jgrowl/ansible-playbook-ruby-from-src

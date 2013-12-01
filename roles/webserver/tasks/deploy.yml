@@ -58,7 +58,7 @@
 - authorized_key: user=deploy key="{{ lookup('file', '/Users/ryanbigg/.ssh/id_rsa.pub') }}"
 
 - name: Create deployment directory
-  file: path=/webapps/{{ app_name }} owner=deploy group=deploy state=directory
+  file: path={{deploy_directory}} owner=deploy group=deploy state=directory
 
 - name: Install Bundler
   command: gem install bundler
