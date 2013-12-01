@@ -1,15 +1,16 @@
-# A small Rails/Sinatra/rack-ready playbook for Ansible
+# A small Rails server playbook for Ansible
+
+**Bastardised from https://github.com/dodecaphonic/ansible-rails-app**
 
 It installs:
 
+- Ruby 2.0.0-p253
+- PostgreSQL
 - nginx
 - Puma (jungle)
-- Ruby 2.0.0-p247
-- PostgreSQL
-- memcached
-- Redis (for Sidekiq)
 
-Change the app name, host and deploy directory in <code>vars/defaults.yml</code>.
+1. Change the app name and deploy directory in <code>vars/defaults.yml</code>.
+2. Rename `hosts.example` to `hosts` and change it to your hosts.
 
 To run:
 
