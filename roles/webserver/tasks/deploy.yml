@@ -60,9 +60,6 @@
 - name: Create deployment directory
   file: path={{deploy_directory}} owner=deploy group=deploy state=directory
 
-- name: Install Bundler
-  command: gem install bundler
-
 - name: Make shared directories
   file: path={{deploy_directory}}/shared/{{item}} group=deploy owner=deploy state=directory
   with_items:
@@ -77,3 +74,6 @@
 
 - name: Install database.yml
   template: src=database.yml.j2 dest={{deploy_directory}}/shared/config/database.yml force=yes mode=755 owner=deploy
+
+- name: Install Bundler
+  command: gem install bundler
