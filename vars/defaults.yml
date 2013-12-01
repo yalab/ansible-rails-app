@@ -1,6 +1,6 @@
 ## webapp
 
-webserver_name: 162.243.123.190
+webserver_name: spree.ryanbigg.com
 deploy_directory: /data/spree
 app_name: spree
 
