@@ -18,8 +18,5 @@
   file: path={{deploy_directory}}/shared/tmp/sockets group=deploy owner=deploy state=directory
   tags: tmp
 
-- name: Create directory for puma sockets
-  file: path={{deploy_directory}}/tmp/sockets state=directory mode=775 group=deploy
-
-- name: Restart puma
-  action: service name=puma state=restarted
+- name: Restart puma-manager
+  action: service name=puma-manager state=restarted
