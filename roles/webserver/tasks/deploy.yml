@@ -55,7 +55,7 @@
 - name: Create deployment user
   user: name=deploy comment="Application deployment user"
 
-- authorized_key: user=deploy key="{{ lookup('file', '/Users/ryanbigg/.ssh/id_rsa.pub') }}"
+- authorized_key: user=deploy key='$FILE(~/.ssh/id_rsa.pub)'
 
 - name: Create deployment directory
   file: path={{deploy_directory}} owner=deploy group=deploy state=directory
