@@ -1,8 +1,8 @@
 ## webapp
 
-webserver_name: spree.ryanbigg.com
-deploy_directory: /data/spree
-app_name: spree
+webserver_name: batman.asrc.org.au
+deploy_directory: /data/asrc-app
+app_name: asrc-app
 
 ## stolen from https://github.com/jgrowl/ansible-playbook-ruby-from-src
 rubyTmpDir: /usr/local/src
