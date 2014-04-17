@@ -14,7 +14,7 @@ It installs:
 
 To run:
 
-    $ ansible-playbook -i hosts ruby-webapp.yml -t deploy,postgresql,nginx
+    $ ansible-playbook -i hosts ruby-webapp.yml -t ruby,deploy,postgresql,nginx
     $ <deploy your app>
     $ ansible-playbook -i hosts ruby-webapp.yml -t puma
 
