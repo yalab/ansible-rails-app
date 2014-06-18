@@ -24,6 +24,7 @@
     - libxml2-dev
     - libxslt1-dev
     - curl
+    - logrotate
 
 - name: Install app dependencies 
   action: apt pkg={{item}} state=installed
