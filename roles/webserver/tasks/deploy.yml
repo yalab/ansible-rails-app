@@ -56,25 +56,24 @@
 - name: Create deployment user
   user: name=deploy comment="Application deployment user"
 
-- authorized_key: user=deploy key='$FILE(~/.ssh/id_rsa.pub)'
+- authorized_key: user=deploy
+                  key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
 
 - name: Create deployment directory
-  file: path={{deploy_directory}} owner=deploy group=deploy state=directory
+  file: path=/data/{{item}} owner=deploy group=deploy state=directory
+  with_items: apps
 
 - name: Make shared directories
-  file: path={{deploy_directory}}/shared/{{item}} group=deploy owner=deploy state=directory
-  with_items:
-    - tmp
-    - log
-    - public
-    - bundle
-    - bin
-    - config
-    - config/puma
+  file: path=/data/{{item[0]}}/shared/{{item[1]}} group=deploy owner=deploy state=directory
+  with_nested:
+    - apps
+    - ['tmp', 'log', 'public', 'bundle', 'bin', 'config', 'config/puma']
   tags: shared
 
 - name: Install database.yml
-  template: src=database.yml.j2 dest={{deploy_directory}}/shared/config/database.yml force=yes mode=755 owner=deploy
+  template: src=database.yml.j2 dest=/data/{{item}}/shared/config/database.yml force=yes mode=755 owner=deploy
+  with_items:
+    - apps
 
 - name: Install Bundler
   command: gem install bundler

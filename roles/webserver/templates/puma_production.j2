@@ -9,11 +9,11 @@ on_worker_boot do
   ActiveRecord::Base.establish_connection(ENV["DATABASE_URL"] || YAML.load_file("#{cwd}/config/database.yml")["production"])
 end
 
-bind 'unix://{{deploy_directory}}/shared/tmp/sockets/puma_asrc-app.sock'
+bind 'unix:///data/{{item}}/shared/tmp/sockets/puma_asrc-app.sock'
 environment 'production'
-pidfile "{{deploy_directory}}/shared/tmp/puma.pid"
-state_path "{{deploy_directory}}/shared/tmp/sockets/puma.state"
+pidfile "/data/{{item}}/shared/tmp/puma.pid"
+state_path "/data/{{item}}/shared/tmp/sockets/puma.state"
 
-rackup '{{deploy_directory}}/current/config.ru'
+rackup '/data/{{item}}/current/config.ru'
 
 activate_control_app
