@@ -1,1 +1,4 @@
-{{deploy_directory}}/current,deploy,{{deploy_directory}}/current/config/puma/production.rb,{{deploy_directory}}/current/log/puma.log
+{% for app in apps %}
+/data/{{app}}/current,deploy,/data/{{app}}/current/config/puma/production.rb,/data/{{app}}/current/log/puma.log
+{% endfor %}
+

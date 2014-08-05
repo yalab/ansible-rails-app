@@ -13,14 +13,12 @@
 - name: Add puma shared/config
   template: src=puma_production.j2 dest=/data/{{item}}/shared/config/puma/production.rb force=yes mode=755
   tags: puma
-  with_items:
-    - apps
+  with_items: apps
 
 - name: Make shared/tmp/sockets
   file: path=/data/{{item}}/shared/tmp/sockets group=deploy owner=deploy state=directory
   tags: tmp
-  with_items:
-    - apps
+  with_items: apps
 
 - name: Restart puma-manager
   action: service name=puma-manager state=restarted

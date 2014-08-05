@@ -72,8 +72,7 @@
 
 - name: Install database.yml
   template: src=database.yml.j2 dest=/data/{{item}}/shared/config/database.yml force=yes mode=755 owner=deploy
-  with_items:
-    - apps
+  with_items: apps
 
 - name: Install Bundler
   command: gem install bundler

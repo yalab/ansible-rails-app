@@ -23,5 +23,4 @@
   postgresql_db: name=app_{{item}} owner=deploy state=present
   sudo: yes
   sudo_user: postgres
-  with_items:
-    - apps
+  with_items: apps

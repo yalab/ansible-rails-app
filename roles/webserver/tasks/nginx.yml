@@ -19,6 +19,9 @@
   command: ln -s /etc/nginx/sites-available/{{item}} /etc/nginx/sites-enabled/{{item}}
   with_items: apps
 
+- name: Validate nginx config
+  command: nginx
+
 - name: Restart nginx
   action: service name=nginx state=restarted
 
