@@ -20,7 +20,7 @@
   with_items: apps
 
 - name: Validate nginx config
-  command: nginx
+  command: nginx -t
 
 - name: Restart nginx
   action: service name=nginx state=restarted
