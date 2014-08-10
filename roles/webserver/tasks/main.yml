@@ -1,4 +1,0 @@
-- include: deploy.yml tags=deploy
-- include: logrotate.yml tags=logrotate
-- include: puma.yml tags=puma
-- include: nginx.yml tags=nginx

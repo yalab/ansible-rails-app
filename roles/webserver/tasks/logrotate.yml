@@ -1,2 +1,0 @@
-- name: Add logrotate config
-  template: src=logrotate.conf.j2 dest=/etc/logrotate.d/asrc-app
