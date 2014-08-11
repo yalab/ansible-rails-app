@@ -4,8 +4,7 @@ webserver_name: batman.asrc.org.au
 app_name: asrc-app
 
 apps:
-  - asrc-app
-  - asrc-members
+  - asrc-reporting-app
 
 ## stolen from https://github.com/jgrowl/ansible-playbook-ruby-from-src
 rubyTmpDir: /usr/local/src
