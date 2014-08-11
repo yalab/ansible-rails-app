@@ -1,0 +1,2 @@
+common_users:
+  - { name: ryan, fullname: "Ryan Bigg", groups: sudo }

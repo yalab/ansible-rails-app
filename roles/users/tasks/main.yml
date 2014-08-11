@@ -1,0 +1,11 @@
+- name: Make the sudo group
+  group: name=sudo system=yes state=present
+
+- name: Create users
+  user: name={{ item.name }} comment="{{ item.fullname }}" groups={{ item.groups }} shell=/bin/bash
+  with_items: users
+
+- name: Add SSH keys
+  authorized_key: user={{ item.name }} key="{{ lookup('file', 'keys/' + item.name) }}"
+  with_items: users
+
