@@ -1,0 +1,8 @@
+- name: "Install nginx"
+  action: apt pkg=nginx state=installed
+
+- name: "Remove default site"
+  file: dest=/etc/nginx/sites-available/default state=absent
+
+- name: "Remove default site symlink"
+  file: dest=/etc/nginx/sites-enabled/default state=absent

@@ -1,0 +1,7 @@
+- name: "Install PostgreSQL"
+  action: apt pkg={{item}} state=installed
+  with_items:
+    - postgresql93-server
+    - postgresql93-contrib
+    - postgresql93
+    - libpq-dev

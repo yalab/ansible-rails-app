@@ -1,2 +1,2 @@
-common_users:
-  - { name: ryan, fullname: "Ryan Bigg", groups: sudo }
+users:
+  - { name: ryanbigg, fullname: "Ryan Bigg", groups: sudo, password: "$6$rounds=100000$wqVMnPMUNe1TPhim$cUi2Y7JnEULmOGJkdTMRUmIJo15Fxqjlejmo.MSEHy6gG0auKyO14urogKwiwJTTCPX4NM5VOZhcwYRlDB4v80" }

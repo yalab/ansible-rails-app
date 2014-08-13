@@ -1,0 +1,10 @@
+server {
+  listen 80 default_server;
+  listen [::]:80 default_server ipv6only=on;
+
+  root /var/www/logs.ryanbigg.com/public;
+  index index.html index.htm;
+
+  # Make site accessible from http://logs.ryanbigg.com/
+  server_name logs.ryanbigg.com;
+}

@@ -1,0 +1,16 @@
+---
+- set_fact: ssh_name="sshd"
+
+- set_fact: ssh_name="ssh"
+  when: ansible_os_family == "Debian"
+
+- name: Configure sshd
+  template: src=sshd_config.j2 dest=/etc/ssh/sshd_config mode=0644 owner=root group=root
+  notify: restart sshd
+
+- name: Enable sshd
+  service: name={{ ssh_name }} state=started enabled=yes
+
+- name: Make empty lastlog to stop ssh complaining in logs
+  command: creates="/var/log/lastlog" touch /var/log/lastlog
+

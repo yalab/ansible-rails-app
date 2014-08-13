@@ -1,0 +1,5 @@
+- name: "Create database user"
+  postgresql_user: name=ryanbigg
+
+- name: create the postgresql database for application
+  postgresql_db: name=railsbot owner=ryanbigg state=present

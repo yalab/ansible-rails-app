@@ -9,3 +9,6 @@
   authorized_key: user={{ item.name }} key="{{ lookup('file', 'keys/' + item.name) }}"
   with_items: users
 
+- name: Add SSH key for root
+  authorized_key: user=root key="{{ lookup('file', 'keys/root') }}"
+
