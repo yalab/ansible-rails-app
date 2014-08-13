@@ -2,7 +2,7 @@
   file: state=directory path=/var/www/logs.ryanbigg.com owner=ryanbigg
 
 - name: Clone the logs app
-  git: repo=git://github.com/radar/logs dest=/var/www/logs.ryanbigg.com update=yes accept_hostkey=true owner=ryanbigg group=ryanbigg
+  git: repo=git://github.com/radar/logs dest=/var/www/logs.ryanbigg.com update=yes accept_hostkey=true
 
 - name: Install Bundle
   command: bundle install --deployment

@@ -1,0 +1,21 @@
+- name: "Check for Ruby installation"
+  command: /opt/rubies/ruby-2.1.2/bin/ruby -v
+  register: ruby_installed
+  ignore_errors: True
+
+- include: install.yml
+  tags: install
+  when: ruby_installed.rc != 0
+
+- name: "Check for Bundler installation"
+  command: /opt/rubies/ruby-2.1.2/bin/bundle -v
+  register: bundler_installed
+  ignore_errors: True
+
+- name: "Install Bundler"
+  command: /opt/rubies/ruby-2.1.2/bin/gem install bundler
+  when: bundler_installed.rc != 0
+
+- name: "Update PATHs"
+  lineinfile: create=yes dest=/home/{{item.name}}/.bash_profile line="export PATH='/opt/rubies/ruby-2.1.2/bin':$PATH"
+  with_items: users

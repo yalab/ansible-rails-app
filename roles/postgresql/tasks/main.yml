@@ -1,7 +1,8 @@
 - name: "Install PostgreSQL"
   action: apt pkg={{item}} state=installed
   with_items:
-    - postgresql93-server
-    - postgresql93-contrib
-    - postgresql93
+    - postgresql-9.3
     - libpq-dev
+    # Deps for Ansible MGMT of Postgres
+    - python-psycopg2
+    - python-pycurl
