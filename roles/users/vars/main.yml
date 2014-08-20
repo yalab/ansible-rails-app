@@ -1,2 +1,2 @@
 users:
-  - { name: ryanbigg, fullname: "Ryan Bigg", groups: sudo, password: "$6$rounds=100000$wqVMnPMUNe1TPhim$cUi2Y7JnEULmOGJkdTMRUmIJo15Fxqjlejmo.MSEHy6gG0auKyO14urogKwiwJTTCPX4NM5VOZhcwYRlDB4v80" }
+  - { name: ryanbigg, fullname: "Ryan Bigg", groups: "sudo,deploy", password: "$6$rounds=100000$amQvgnd1RlihGlN3$qsBDztVgj9DFlNDXI9UmRr.ZaoHAxI8hpg.fH9NqXtRYFvX4dgtSEdt7GEgmoqqtvq4HX3pqBOjzx5avzA6QF0" }

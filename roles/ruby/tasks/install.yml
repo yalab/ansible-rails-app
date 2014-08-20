@@ -9,3 +9,15 @@
 
 - name: "Install Ruby stable"
   command: ruby-install ruby stable
+
+- name: "Get chruby"
+  command: "{{item}}"
+  with_items:
+    - wget -O chruby-0.3.8.tar.gz https://github.com/postmodern/chruby/archive/v0.3.8.tar.gz
+    - tar -xzvf chruby-0.3.8.tar.gz
+
+- name: "Install chruby"
+  command: chdir=chruby-0.3.8 sudo make install
+
+- name: "Remove ruby-install"
+  command: rm -rf ruby-install-0.4.3

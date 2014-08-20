@@ -1,5 +1,0 @@
-- include: config.yml
-  tags: config
-
-- include: deploy.yml
-  tags: deploy

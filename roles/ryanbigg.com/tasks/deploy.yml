@@ -1,5 +1,0 @@
-- name: Make the ryanbigg.com directory
-  file: state=directory path=/var/www/ryanbigg.com owner=ryanbigg group=sudo
-
-- name: Clone the blog
-  git: repo=git://github.com/radar/ryanbigg.com dest=/var/www/ryanbigg.com update=yes accept_hostkey=true owner=ryanbigg group=ryanbigg

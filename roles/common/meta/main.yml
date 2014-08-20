@@ -1,5 +1,5 @@
 ---
 dependencies:
-  - { role: users, tags: ["users", "common"] }
-  - { role: secure_sshd, tags: ["sshd", "common"] }
+  - { role: users, tags: ["users", "common"], sudo: yes }
+  - { role: secure_sshd, tags: ["sshd", "common"], sudo: yes }
 
