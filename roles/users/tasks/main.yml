@@ -1,0 +1,29 @@
+- name: Make the sudo group
+  group: name=sudo system=yes state=present
+
+- name: Make the deploy group
+  group: name=deploy system=yes state=present
+
+- name: Create users
+  user: name={{ item.name }} comment="{{ item.fullname }}" groups={{ item.groups }} shell=/bin/bash
+  with_items: users
+
+- name: Create deploy user
+  user: name=deploy groups=deploy shell=/bin/bash
+
+- name: Add SSH keys
+  authorized_key: user={{ item.name }} key="{{ lookup('file', 'keys/' + item.name) }}"
+  with_items: users
+
+- name: Add SSH key for deploy
+  # I have no idea why this line doesn't work
+  authorized_key: user=deploy key="{{ lookup('file', 'keys/deploy') }}"
+
+- name: Add GitHub deploy key id_rsa for user
+  copy: src="deploy.{{item}}" dest=/home/deploy/.ssh/{{item}} owner=deploy group=deploy mode=0600
+  with_items:
+    - id_rsa
+    - id_rsa.pub
+
+- name: Add SSH key for root
+  authorized_key: user=root key="{{ lookup('file', 'keys/root') }}"

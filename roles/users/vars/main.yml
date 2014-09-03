@@ -1,0 +1,2 @@
+users:
+  - { name: ryan, fullname: "Ryan Bigg", groups: "sudo,deploy", password: "$6$rounds=100000$amQvgnd1RlihGlN3$qsBDztVgj9DFlNDXI9UmRr.ZaoHAxI8hpg.fH9NqXtRYFvX4dgtSEdt7GEgmoqqtvq4HX3pqBOjzx5avzA6QF0" }

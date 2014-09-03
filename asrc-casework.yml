@@ -2,11 +2,17 @@
 - hosts: all
   user: root
   vars_files:
-    - vars/defaults.yml
+    - vars/casework.yml
 
   roles:
+    - common
+    - secure_sshd
+    - { role: users, tags: users }
+    - ruby
+    - postgresql
+    - deploy
     - webserver
-    - database
+    - casework
 
   handlers: 
     - name: Restart puma

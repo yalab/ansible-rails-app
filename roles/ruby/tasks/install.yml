@@ -1,0 +1,11 @@
+- name: "Get ruby-install"
+  command: "{{item}}"
+  with_items:
+    - wget -O ruby-install-0.4.3.tar.gz https://github.com/postmodern/ruby-install/archive/v0.4.3.tar.gz
+    - tar -xzvf ruby-install-0.4.3.tar.gz
+
+- name: "Install ruby-install"
+  command: chdir=ruby-install-0.4.3 sudo make install
+
+- name: "Install Ruby stable"
+  command: ruby-install ruby stable

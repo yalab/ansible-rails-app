@@ -1,0 +1,17 @@
+- name: "Check for Ruby installation"
+  command: "{{ruby}} -v"
+  register: ruby_installed
+  ignore_errors: True
+
+- include: install.yml
+  tags: install
+  when: ruby_installed.rc != 0
+
+- name: "Check for Bundler installation"
+  command: "{{bundler}} -v"
+  register: bundler_installed
+  ignore_errors: True
+
+- name: "Install Bundler"
+  command: "{{gem}} install bundler"
+  when: bundler_installed.rc != 0

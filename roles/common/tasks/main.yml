@@ -1,0 +1,10 @@
+---
+- name: upgrade
+  action: apt update_cache=yes upgrade=yes
+
+- name: install build-essential + logrotate dependencies 
+  action: apt pkg={{item}} state=installed
+  with_items:
+    - build-essential
+    - logrotate
+    - git-core

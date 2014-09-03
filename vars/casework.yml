@@ -1,0 +1,3 @@
+webserver_name: batman.asrc.org.au
+deploy_directory: /data/asrc-app
+app_name: asrc-app
