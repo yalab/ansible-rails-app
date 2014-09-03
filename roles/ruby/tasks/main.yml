@@ -15,3 +15,7 @@
 - name: "Install Bundler"
   command: "{{gem}} install bundler"
   when: bundler_installed.rc != 0
+
+- name: "Add PATH to /etc/environment"
+  copy: src=environment dest=/etc/environment
+
