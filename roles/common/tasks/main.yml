@@ -8,3 +8,4 @@
     - build-essential
     - logrotate
     - git-core
+    - libpq-dev
