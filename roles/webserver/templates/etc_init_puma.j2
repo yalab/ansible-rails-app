@@ -30,6 +30,8 @@ respawn limit 3 30
 instance {{deploy_directory}}/current
 
 script
+. /etc/environment
+export PATH
 cd {{deploy_directory}}/current
 logger -t puma "Starting server: $app"
 exec bundle exec puma -C {{deploy_directory}}/current/config/puma/production.rb
