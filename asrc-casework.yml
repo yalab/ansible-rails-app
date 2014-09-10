@@ -8,10 +8,10 @@
     - common
     - secure_sshd
     - { role: users, tags: users }
-    - ruby
+    - { role: ruby, tags: ruby }
     - postgresql
     - deploy
-    - webserver
+    - { role: webserver, tags: webserver }
     - casework
 
   handlers: 
