@@ -22,6 +22,8 @@ stop on runlevel [06]
 # to run on this machine
 env PUMA_CONF="/etc/puma.conf"
 
+instance "puma-manager"
+
 pre-start script
   for i in `cat $PUMA_CONF`; do
     app=`echo $i | cut -d , -f 1`
