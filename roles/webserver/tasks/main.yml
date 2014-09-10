@@ -18,8 +18,8 @@
   file: path={{deploy_directory}}/shared/tmp/sockets group=deploy owner=deploy state=directory
   tags: tmp
 
-- name: Restart puma-manager
-  action: service name=puma-manager state=restarted
+- name: restart puma-manager
+  command: restart puma-manager  
 
 - name: Install nginx
   apt: pkg=nginx state=latest
