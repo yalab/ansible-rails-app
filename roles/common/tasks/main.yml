@@ -9,3 +9,4 @@
     - logrotate
     - git-core
     - libpq-dev
+    - nodejs
