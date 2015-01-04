@@ -15,7 +15,7 @@
   tags: puma
 
 - name: Make shared/tmp/sockets
-  file: path={{deploy_directory}}/shared/tmp/sockets group=deploy owner=deploy state=directory
+  file: path={{deploy_directory}}/shared/tmp/sockets group={{app_name}} owner={{app_name}} state=directory
   tags: tmp
 
 - name: Restart puma-manager

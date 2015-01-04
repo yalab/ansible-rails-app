@@ -1,13 +1,13 @@
 - name: Create deployment user
-  user: name=deploy comment="Application deployment user"
+  user: name={{app_name}} comment="Application deployment user"
 
-- authorized_key: user=deploy key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+- authorized_key: user={{app_name}} key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
 
 - name: Create deployment directory
-  file: path={{deploy_directory}} owner=deploy group=deploy state=directory
+  file: path={{deploy_directory}} owner={{app_name}} group={{app_name}} state=directory
 
 - name: Make shared directories
-  file: path={{deploy_directory}}/shared/{{item}} group=deploy owner=deploy state=directory
+  file: path={{deploy_directory}}/shared/{{item}} group={{app_name}} owner={{app_name}} state=directory
   with_items:
     - tmp
     - log
@@ -19,4 +19,4 @@
   tags: shared
 
 - name: Install database.yml
-  template: src=database.yml.j2 dest={{deploy_directory}}/shared/config/database.yml force=yes mode=755 owner=deploy
+  template: src=database.yml.j2 dest={{deploy_directory}}/shared/config/database.yml force=yes mode=755 owner={{app_name}}

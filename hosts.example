@@ -1,1 +1,5 @@
 162.243.123.190
+
+[all:vars]
+app_name=railsapp
+domain=example.com

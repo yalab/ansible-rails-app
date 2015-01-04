@@ -1,8 +1,7 @@
 ## webapp
 
-webserver_name: spree.ryanbigg.com
-deploy_directory: /data/spree
-app_name: spree
+webserver_name: "{{app_name}}.{{domain}}"
+deploy_directory: /data/{{app_name}}
 
 ## stolen from https://github.com/jgrowl/ansible-playbook-ruby-from-src
 rubyTmpDir: /usr/local/src

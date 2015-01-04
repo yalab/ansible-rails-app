@@ -1,4 +1,4 @@
-- include: ruby.yml tags=ruby
-- include: deploy.yml tags=deploy
+- include: ruby.yml tags={{app_name}}
+- include: deploy.yml tags={{app_name}}
 - include: puma.yml tags=puma
 - include: nginx.yml tags=nginx
