@@ -1,9 +1,3 @@
-set :application, ENV["APP_NAME"]
-set :repo_url, ENV["REPOSITORY"]
-set :deploy_to, "/data/#{ENV["APP_NAME"]}"
-set :log_level, :debug
-set :linked_files, %w{config/database.yml}
-set :linked_dirs, %w{tmp/sockets log config/puma public}
 set :sockets_path, Pathname.new("#{fetch(:deploy_to)}/shared/tmp/sockets/")
 
 # These puma settings are only here because capistrano-puma is borked.
