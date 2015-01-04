@@ -3,3 +3,4 @@
 [all:vars]
 app_name=railsapp
 domain=app.example.com
+dbpassword="password"
