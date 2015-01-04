@@ -1,6 +1,6 @@
 ## webapp
 
-webserver_name: "{{app_name}}.{{domain}}"
+webserver_name: "{{domain}}"
 deploy_directory: /data/{{app_name}}
 
 ## stolen from https://github.com/jgrowl/ansible-playbook-ruby-from-src

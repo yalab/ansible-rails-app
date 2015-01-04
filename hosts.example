@@ -2,4 +2,4 @@
 
 [all:vars]
 app_name=railsapp
-domain=example.com
+domain=app.example.com
