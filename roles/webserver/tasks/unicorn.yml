@@ -1,0 +1,11 @@
+- name: install unicorn
+  gem: name=unicorn state=present
+  tags: unicorn
+
+- name: Add unicorn config
+  template: src=unicorn.conf.j2 dest={{deploy_directory}}/shared/config/unicorn.conf force=yes mode=644
+  tags: unicorn
+
+- name: Make shared/tmp/sockets
+  file: path={{deploy_directory}}/shared/tmp/sockets group={{app_name}} owner={{app_name}} state=directory
+  tags: tmp

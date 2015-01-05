@@ -1,0 +1,15 @@
+listen "{{deploy_directory}}/shared/tmp/sock/unicorn.sock", backlog: 64
+worker_processes {{ ansible_processor_count + 1 }}
+pid "{{deploy_directory}}/shared/pids/unicorn.pid"
+stderr_path "{{deploy_directory}}/shared/log/unicorn.log"
+stdout_path "{{deploy_directory}}/shared/log/unicorn.log"
+
+preload_app true
+user "{{app_name}}", "{{app_name}}"
+
+before_fork do |server, worker|
+  ActiveRecord::Base.connection.disconnect! if defined?(ActiveRecord::Base)
+end
+after_fork do |server, worker|
+  ActiveRecord::Base.establish_connection if defined?(ActiveRecord::Base)
+end

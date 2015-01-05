@@ -15,7 +15,6 @@
     - bundle
     - bin
     - config
-    - config/puma
   tags: shared
 
 - name: Install database.yml
