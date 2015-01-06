@@ -2,8 +2,12 @@
   gem: name=unicorn state=present
   tags: unicorn
 
+- name: Make shared/config/unicorn
+  file: path={{deploy_directory}}/shared/config/unicorn group={{app_name}} owner={{app_name}} state=directory
+  tags: unicorn
+
 - name: Add unicorn config
-  template: src=unicorn.conf.j2 dest={{deploy_directory}}/shared/config/unicorn.conf force=yes mode=644
+  template: src=unicorn.rb.j2 dest={{deploy_directory}}/shared/config/unicorn/{{stage}}.rb force=yes mode=644
   tags: unicorn
 
 - name: Make shared/tmp/sockets

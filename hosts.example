@@ -1,6 +1,7 @@
 162.243.123.190
 
 [all:vars]
+stage=production
 app_name=railsapp
 domain=app.example.com
 dbpassword="password"

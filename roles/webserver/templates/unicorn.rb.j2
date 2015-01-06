@@ -1,6 +1,6 @@
-listen "{{deploy_directory}}/shared/tmp/sock/unicorn.sock", backlog: 64
+listen "{{deploy_directory}}/shared/tmp/sockets/unicorn.sock", backlog: 64
 worker_processes {{ ansible_processor_count + 1 }}
-pid "{{deploy_directory}}/shared/pids/unicorn.pid"
+pid "{{deploy_directory}}/shared/tmp/pids/unicorn.pid"
 stderr_path "{{deploy_directory}}/shared/log/unicorn.log"
 stdout_path "{{deploy_directory}}/shared/log/unicorn.log"
 
