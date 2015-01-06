@@ -10,13 +10,35 @@ It installs:
 - Unicorn
 
 1. Change the app name and deploy directory in <code>vars/defaults.yml</code>.
-2. Rename `hosts.example` to `hosts` and change it to your hosts.
+2. Rename `hosts.example` to `staging` or `production` and change it to your hosts.
 
 To run:
 
-    $ ansible-playbook -i hosts ruby-webapp.yml -t ruby,deploy,postgresql,nginx
+    $ ansible-playbook -i staging ruby-webapp.yml -t ruby,deploy,postgresql,nginx
     $ <deploy your app>
-    $ ansible-playbook -i hosts ruby-webapp.yml -t unicorn
+    $ ansible-playbook -i staging ruby-webapp.yml -t unicorn
 
-There is an example Capistrano `deploy.rb` in this repository that you can use too.
+Add the library to your rails app Gemfile:
+
+    group :development do
+      gem 'capistrano3-unicorn'
+    end
+
+To run:
+
+    $ cap install
+
+Add the library to your Capfile:
+
+    require 'capistrano3/unicorn'
+
+Add line your config/deploy.rb to require this deploy.rb 
+
+    require PATH/TO/THIS/REPOS/deploy.rb
+
+To run:
+
+    $ cap staging deploy
+
+    
 
