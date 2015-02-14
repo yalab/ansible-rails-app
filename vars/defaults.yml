@@ -1,7 +1,7 @@
 ## webapp
 
 webserver_name: "{{domain}}"
-deploy_directory: /data/{{app_name}}
+deploy_directory: /home/{{app_name}}/railsapp
 
 ## stolen from https://github.com/jgrowl/ansible-playbook-ruby-from-src
 rubyTmpDir: /usr/local/src
