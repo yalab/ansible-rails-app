@@ -4,8 +4,8 @@
 
 It installs:
 
-- Ruby 2.1
-- PostgreSQL
+- Ruby 2.2
+- PostgreSQL 9.3
 - nginx
 - Unicorn
 
