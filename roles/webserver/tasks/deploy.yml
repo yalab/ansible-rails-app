@@ -9,13 +9,8 @@
 - name: Make shared directories
   file: path={{deploy_directory}}/shared/{{item}} group={{app_name}} owner={{app_name}} state=directory
   with_items:
-    - tmp
-    - log
-    - public
-    - bundle
-    - bin
     - config
   tags: shared
 
-- name: Install database.yml
-  template: src=database.yml.j2 dest={{deploy_directory}}/shared/config/database.yml force=yes mode=755 owner={{app_name}}
+- name: Create .env
+  template: src=dotenv.j2 dest={{deploy_directory}}/shared/.env force=yes mode=644 owner={{app_name}}

@@ -1,0 +1,3 @@
+DATABASE_URL="postgresql://{{ app_name }}:{{ dbpassword | urlencode }}@localhost:5432/{{ app_name }}"
+RAILS_ENV='{{ stage }}'
+SECRET_KEY_BASE="{{ ansible_date_time.iso8601_micro | hash('sha512') }}"
