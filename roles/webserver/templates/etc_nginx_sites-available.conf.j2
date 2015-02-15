@@ -1,22 +1,40 @@
 upstream {{ app_name }} {
-  server unix://{{deploy_directory}}/shared/tmp/sockets/unicorn.sock;
+  server unix:{{ deploy_directory }}/shared/tmp/sockets/unicorn.sock;
 }
 
 server {
-  gzip on;
   listen 80;
+  server_name {{ webserver_name }};
+  return 301 https://$host$request_uri;
+}
 
-  gzip_types text/plain text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript application/json;                                                                      
+server {
+  listen 443;
+
   server_name {{ webserver_name }};
   root {{ deploy_directory }}/current/public;
 
+  ssl on;
+  ssl_certificate      /etc/nginx/certs/{{ app_name }}.crt;
+  ssl_certificate_key  /etc/nginx/certs/{{ app_name }}.key;
+
+  gzip on;
+  gzip_types text/plain text/css application/x-javascript text/xml application/xml application/xml+rss text/javascript application/json;
+
   location / {
-    proxy_pass http://{{ app_name }}; # match the name of upstream directive which is defined above
     proxy_set_header Host $host;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Real-IP        $remote_addr;
+    proxy_set_header X-Forwarded-For  $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-User $remote_user;
+    proxy_pass http://{{ app_name }};
+
+    proxy_set_header X-Sendfile-Type X-Accel-Redirect;
+    proxy_set_header X-Accel-Mapping /video={{ deploy_directory }}/shared/video;
   }
 
-  location /robots.txt {}
+  location /robots.txt {
+    alias {{ deploy_directory }}/shared/public/robots.txt;
+  }
 
   location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
     expires 1y;
@@ -27,9 +45,11 @@ server {
     gzip_static on;
     expires     max;
     add_header  Cache-Control public;
-    add_header  Last-Modified "";
-    add_header  ETag "";
-
     break;
   }  
+
+  location {{ deploy_directory }}/shared/video {
+    internal;
+    alias {{ deploy_directory }}/shared/video ;
+  }
 }
