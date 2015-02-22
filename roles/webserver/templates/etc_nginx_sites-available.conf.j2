@@ -29,7 +29,7 @@ server {
     proxy_pass http://{{ app_name }};
 
     proxy_set_header X-Sendfile-Type X-Accel-Redirect;
-    proxy_set_header X-Accel-Mapping /video={{ deploy_directory }}/shared/video;
+    proxy_set_header X-Accel-Mapping {{ deploy_directory }}/shared/video=/video;
   }
 
   location /robots.txt {
@@ -48,7 +48,7 @@ server {
     break;
   }  
 
-  location {{ deploy_directory }}/shared/video {
+  location /video {
     internal;
     alias {{ deploy_directory }}/shared/video ;
   }
