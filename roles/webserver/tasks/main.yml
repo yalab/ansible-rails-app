@@ -2,3 +2,4 @@
 - include: deploy.yml tags={{app_name}}
 - include: unicorn.yml tags=unicorn
 - include: nginx.yml tags=nginx
+- include: redis.yml tags=redis

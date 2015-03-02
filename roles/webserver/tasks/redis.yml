@@ -1,0 +1,9 @@
+- name: add rwky/redis ppa
+  apt_repository: repo='ppa:rwky/redis'
+
+- name: upgrade
+  action: apt update_cache=yes upgrade=yes
+
+- name: install redis
+  apt: pkg=redis-server state=latest
+
