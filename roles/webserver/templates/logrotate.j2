@@ -1,0 +1,13 @@
+{{deploy_directory}}/shared/log/*.log {
+        weekly
+        missingok
+        rotate 52
+        compress
+        delaycompress
+        notifempty
+        sharedscripts
+        postrotate
+                [ -s {{deploy_directory}}/shared/tmp/pids/unicorn.pid  ] && kill -USR1 `cat {{deploy_directory}}/shared/tmp/pids/unicorn.pid`
+                [ -s {{deploy_directory}}/shared/tmp/pids/sidekiq.pid  ] && kill -USR1 `cat {{deploy_directory}}/shared/tmp/pids/sidekiq.pid`
+        endscript
+}

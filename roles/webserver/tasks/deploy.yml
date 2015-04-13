@@ -14,3 +14,7 @@
 
 - name: Create .env
   template: src=dotenv.j2 dest={{deploy_directory}}/shared/.env force=yes mode=644 owner={{app_name}}
+
+- name: Setting logrotate
+  template: src=logrotate.j2 dest=/etc/logrotate.d/{{app_name}} force=yes mode=644 owner=root
+
