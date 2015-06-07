@@ -3,3 +3,4 @@
 - include: unicorn.yml tags=unicorn
 - include: nginx.yml tags=nginx
 - include: redis.yml tags=redis
+- include: monit.yml tags=monit

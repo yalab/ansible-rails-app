@@ -1,0 +1,3 @@
+- name: Install monit
+  apt: pkg=monit state=latest
+
