@@ -3,3 +3,10 @@
 
 - name: permit sudo
   template: src=sudo.j2 dest=/etc/sudoers.d/{{app_name}} force=yes mode=440 owner=root
+
+- name: put default config
+  template: src=monit.j2 dest=/etc/monit/conf.d/default force=yes mode=640 owner=root
+
+- name: install mailutils
+  apt: pkg=mailutils state=latest
+
