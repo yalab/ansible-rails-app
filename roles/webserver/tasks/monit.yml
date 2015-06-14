@@ -1,3 +1,5 @@
 - name: Install monit
   apt: pkg=monit state=latest
 
+- name: permit sudo
+  template: src=sudo.j2 dest=/etc/sudoers.d/{{app_name}} force=yes mode=440 owner=root
