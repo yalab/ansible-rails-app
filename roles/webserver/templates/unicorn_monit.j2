@@ -1,0 +1,9 @@
+# Monit configuration for Unicorn {{app_name}}
+check process unicorn_{{app_name}}
+  with pidfile "{{deploy_directory}}/shared/tmp/pids/unicorn.pid"
+  start program = "/bin/su - {{app_name}} -c 'cd {{deploy_directory}}/current &&( RAILS_ENV={{stage}} /usr/bin/env bundle exec unicorn -c {{deploy_directory}}/current/config/unicorn/{{stage}}.rb -E deployment -D )'" with timeout 30 seconds
+
+  stop program = "/bin/su - {{app_name}} -c 'cd {{deploy_directory}}/current && /usr/bin/env kill -s QUIT `cat {{deploy_directory}}/current/tmp/pids/unicorn.pid`'" with timeout 30 seconds
+  group {{app_name}}-unicorn
+
+

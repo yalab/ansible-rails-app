@@ -10,3 +10,8 @@
 - name: install mailutils
   apt: pkg=mailutils state=latest
 
+- name: install monit config for unicorn
+  template: src=unicorn_monit.j2 dest=/etc/monit/conf.d/{{app_name}}_unicorn_{{stage}}.conf force=yes mode=640 owner=root
+
+- name: restart monit
+  action: service name=monit state=restarted
